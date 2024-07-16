@@ -6,7 +6,10 @@ name: Python package
 on:
   schedule:
     - cron: "30 22 * * 1-5"
+  workflow_dispatch:
 
+env:
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
 jobs:
   build:
