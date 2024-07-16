@@ -5,7 +5,7 @@ name: Python package
 
 on:
   schedule:
-    - cron: "47 22 * * *"
+    - cron: "51 14 * * *"
   workflow_dispatch:
 
 env:
