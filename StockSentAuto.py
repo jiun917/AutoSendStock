@@ -40,7 +40,7 @@ def GetStockInfo(stockList):
 
             stockInfo_dataframe['stockName'][i] = stock_name
             stockInfo_dataframe['stockOpen'][i] = stock_open
-            stockInfo_dataframe['stockNow'][i] = f"{stock_now}+({_stockChange})"
+            stockInfo_dataframe['stockNow'][i] = f"{stock_now}({_stockChange})"
             stockInfo_dataframe['stockHigh'][i] = stock_high
             stockInfo_dataframe['stockLow'][i] = stock_low
             stockInfo_dataframe['stockVolume'][i] = stock_volume
