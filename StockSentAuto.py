@@ -31,7 +31,7 @@ def GetStockInfo(stockList):
             stock_low = format_to_two_decimals(float(stock_rt['realtime']['low'])) if stock_rt['realtime']['low'] else None
             stock_volume = int(stock_rt['realtime']['accumulate_trade_volume']) if stock_rt['realtime']['accumulate_trade_volume'] else None
 
-            stock_history = twstock.Stock(stockList[i])[-1]
+            stock_history = twstock.Stock(stockList[i])
             stockChange = stock_history.change[-1]
             if(stockChange>= 0):
                 _stockChange = "▲" + str(abs(stockChange))
