@@ -31,10 +31,16 @@ def GetStockInfo(stockList):
             stock_low = format_to_two_decimals(float(stock_rt['realtime']['low'])) if stock_rt['realtime']['low'] else None
             stock_volume = int(stock_rt['realtime']['accumulate_trade_volume']) if stock_rt['realtime']['accumulate_trade_volume'] else None
 
+            stock_history = twstock.Stock(stockList[i])[-1]
+            stockChange = stock_history.change[-1]
+            if(stockChange>= 0):
+                _stockChange = "▲" + str(abs(stockChange))
+            else:
+                _stockChange = "▼" + str(abs(stockChange))    
 
             stockInfo_dataframe['stockName'][i] = stock_name
             stockInfo_dataframe['stockOpen'][i] = stock_open
-            stockInfo_dataframe['stockNow'][i] = stock_now
+            stockInfo_dataframe['stockNow'][i] = f"{stock_now}+({_stockChange})"
             stockInfo_dataframe['stockHigh'][i] = stock_high
             stockInfo_dataframe['stockLow'][i] = stock_low
             stockInfo_dataframe['stockVolume'][i] = stock_volume
