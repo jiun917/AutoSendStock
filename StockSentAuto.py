@@ -17,7 +17,8 @@ def GetStockInfo(stockList):
                                                 'stockNow',
                                                 'stockHigh',
                                                 'stockLow',
-                                                'stockVolume'])
+                                                'stockVolume',
+                                                'stockChange'])
 
     stockInfo_dataframe['ticker'] = stockList
 
@@ -36,24 +37,24 @@ def GetStockInfo(stockList):
             if(stockChange>= 0):
                 _stockChange = "▲" + str(abs(stockChange))
             else:
-                _stockChange = "▼" + str(abs(stockChange))    
+                _stockChange = "▼" + str(abs(stockChange))            
 
             stockInfo_dataframe['stockName'][i] = stock_name
             stockInfo_dataframe['stockOpen'][i] = stock_open
-            stockInfo_dataframe['stockNow'][i] = f"{stock_now}({_stockChange})"
+            stockInfo_dataframe['stockNow'][i] = stock_now
             stockInfo_dataframe['stockHigh'][i] = stock_high
             stockInfo_dataframe['stockLow'][i] = stock_low
             stockInfo_dataframe['stockVolume'][i] = stock_volume
+            stockInfo_dataframe['stockChange'][i] = _stockChange
         except Exception as e:
             print(f"Error: {e}")
 
     return stockInfo_dataframe
-
 def generate_message(stockInfo_dataframe):
     for i in range(len(stockInfo_dataframe)):
-        message = f"{stockInfo_dataframe['stockName'][i]}({stockInfo_dataframe['ticker'][i]}) \n 現價：{stockInfo_dataframe['stockNow'][i]} \n 開盤：{stockInfo_dataframe['stockOpen'][i]} \n 最高價：{stockInfo_dataframe['stockHigh'][i]} \n 最低價：{stockInfo_dataframe['stockLow'][i]} \n 交易量：{stockInfo_dataframe['stockVolume'][i]} \n"
+        message = f"{stockInfo_dataframe['stockName'][i]}({stockInfo_dataframe['ticker'][i]}) \n 現價：{stockInfo_dataframe['stockNow'][i]}({stockInfo_dataframe['stockChange'][i]}) \n 開盤：{stockInfo_dataframe['stockOpen'][i]} \n 最高價：{stockInfo_dataframe['stockHigh'][i]} \n 最低價：{stockInfo_dataframe['stockLow'][i]} \n 交易量：{stockInfo_dataframe['stockVolume'][i]} \n"
         status = lineNotifyMessage(LINE_NOTIFY_TOKEN, message)
-        print(status)
+        print(message)
 
 def lineNotifyMessage(token, msg):
     headers = {
